@@ -1,0 +1,10 @@
+{
+  "yeast": {
+    "title": "Yeast Types",
+    "content": "<strong>Yeast</strong> is a leavening agent. <ul><li><b>Instant yeast</b>: Fast-acting, can be mixed directly into flour.</li><li><b>Active dry yeast</b>: Needs to be dissolved in water first.</li><li><b>Sourdough starter</b>: Natural yeast culture, gives tangy flavor.</li></ul>"
+  },
+  "sourdough starter": {
+    "title": "Sourdough Starter",
+    "content": "A <strong>sourdough starter</strong> is a mixture of flour and water colonized by wild yeast and bacteria, used for natural leavening."
+  }
+}

@@ -1,0 +1,42 @@
+
+# Node
+node_modules/
+.npm/
+.nyc_output/
+
+# Build output
+_site/
+dist/
+
+# Eleventy
+.cache/
+.eleventy/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Python
+*.pyc
+__pycache__/
+
+# Env
+.env
+.env.*
+
+# Misc
+*.swp
+*.swo
+
+# Dependency lock
+package-lock.json
+yarn.lock
+
+# Data
+src/recipes.json

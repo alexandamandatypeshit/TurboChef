@@ -1,0 +1,19 @@
+{
+  "name": "turbo-chef",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i src/styles/input.css -o _site/styles.css --minify",
+    "build:11ty": "npx @11ty/eleventy",
+    "build": "npm run build:css && npm run build:11ty",
+    "start": "concurrently \"tailwindcss -i src/styles/input.css -o .eleventy/_tmp/styles.css --watch\" \"npx @11ty/eleventy --serve\""
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^7.6.0",
+    "eleventy": "^1.0.1",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.4.7"
+  }
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ title or "TurboChef" }}</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg-gray-50 text-gray-900 relative overflow-x-hidden">
+  <div class="bg-blob"></div>
+  <div class="animated-bg"></div>
+  <header class="max-w-3xl mx-auto p-6">
+    <div class="flex items-center gap-4">
+      <img src="/assets/chef-hat.svg" alt="Chef Hat" class="w-12 h-12 drop-shadow-lg">
+      <h1 class="text-5xl font-serif font-bold tracking-tight text-accent drop-shadow">TurboChef</h1>
+    </div>
+    <nav class="mt-6 flex gap-4 nav-bar">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/recipes/cooking/">Cooking</a>
+      <a class="nav-link" href="/recipes/baking/">Baking</a>
+      <a class="nav-link" href="/recipes/sauces/">Sauces</a>
+    </nav>
+  </header>
+  <main class="max-w-3xl mx-auto p-6">
+    {{ content | safe }}
+  </main>
+  <script src="/assets/search.js"></script>
+  <footer class="max-w-3xl mx-auto p-6 text-sm text-gray-600 border-t mt-12">
+    <span class="font-bold text-accent">© {{ site.year }} TurboChef</span>
+    <span class="ml-2">A modern personal cookbook.</span>
+  </footer>
+</body>
+</html>

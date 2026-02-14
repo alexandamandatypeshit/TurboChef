@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+---
+<article class="prose recipe-article max-w-2xl mx-auto print:shadow-none print:bg-white">
+  <h1>{{ title }}</h1>
+  {% if image and image != '' %}
+    <img src="{{ image }}" alt="{{ title }}">
+  {% endif %}
+  <div class="flex flex-wrap gap-3 text-base mb-4">
+    <span class="info-badge section-badge">{{ section | capitalize }}</span>
+    <span class="info-badge">Prep: {{ prep_time }}</span>
+    <span class="info-badge">Cook: {{ cook_time }}</span>
+    <span class="info-badge">Serves: {{ servings }}</span>
+  </div>
+  <div id="calorie-estimate" style="margin-bottom:1.2em;font-size:1.08em;color:#b45309;"></div>
+  <h2>Ingredients</h2>
+  <ul>
+  {% for item in ingredients %}
+    <li>{{ item | keywordify | safe }}</li>
+  {% endfor %}
+  </ul>
+  <h2>Steps</h2>
+  <ol>
+  {% for step in steps %}
+    <li>{{ step | keywordify | safe }}</li>
+  {% endfor %}
+  </ol>
+</article>
+<script src="/assets/modal.js"></script>
+<script src="/assets/calorie.js"></script>
+</article>
