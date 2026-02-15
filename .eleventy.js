@@ -37,6 +37,9 @@ module.exports = function(eleventyConfig) {
       const rel = inputPath.replace(/\\/g, '/').replace(/.*\/src/, '/src');
       const withoutSrc = rel.replace(/^\/src/, '');
       let cleanPath = withoutSrc.replace(/\.(md|njk|html)$/, '');
+      // If the source filename includes a language marker like `.fr`, strip it
+      // so URLs become /fr/recipes/slug/ rather than /fr/recipes/slug.fr/
+      cleanPath = cleanPath.replace(/\.fr$/, '');
       // Remove trailing /index (we want /fr/recipes/foo/ rather than /fr/recipes/foo/index)
       cleanPath = cleanPath.replace(/\/index$/, '');
       if (cleanPath === '') cleanPath = '/';

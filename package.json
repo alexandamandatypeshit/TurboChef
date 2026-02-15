@@ -2,6 +2,9 @@
   "name": "turbo-chef",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build:css": "tailwindcss -i src/styles/input.css -o _site/styles.css --minify",
     "build:11ty": "npx @11ty/eleventy",
