@@ -24,6 +24,39 @@
 @tailwind components;
 @tailwind utilities;
 
+.lang-switcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.lang-select {
+  background: #fffbe6;
+  color: #b45309;
+  border: 2px solid #f59e42;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px 0 #f59e4220;
+  transition: border 0.2s, box-shadow 0.2s;
+  outline: none;
+  margin-left: auto;
+}
+.lang-select:focus, .lang-select:hover {
+  border-color: #b45309;
+  box-shadow: 0 4px 16px 0 #f59e4280;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
 :root {
 	--max-width: 48rem;
 }

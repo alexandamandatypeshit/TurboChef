@@ -1,6 +1,7 @@
 ---
 layout: layouts/base.njk
 title: TurboChef — Too ez
+lang: en
 ---
 <div class="text-center">
   <div class="flex justify-center mb-6">
@@ -12,7 +13,7 @@ title: TurboChef — Too ez
   <h2 class="text-3xl font-bold text-accent mb-2">No ads, no bs, just my recipes</h2>
   <p class="mt-2 text-lg text-gray-700">Find my recipes for cooking, baking, and sauces here. Most of them include helpful notes to explain why you’re doing certain steps—so you can truly understand the process instead of just following instructions blindly.
 
-This is also a simple repertoire of proven recipes I’ve personally tested and refined—tweaking hydration levels, adjusting ratios, dialing in seasoning, and making small changes that actually make a difference. They’re not theoretical. They’re cooked, baked, messed with, and improved.
+This is also a simple repertoire of proven recipes I’ve personally tested and refined—tweaking hydration levels, adjusting ratios, dialing in seasoning, and making small changes that actually make a difference. They’re not theoretical. They’re cooked, baked, messed with, and improved.  
 
 Are there more “elevated” recipes out there? Sure. Some are locked behind restaurant doors for obvious reasons. Others require ridiculous amounts of time, specialty equipment, or money. That’s not the goal here.
 

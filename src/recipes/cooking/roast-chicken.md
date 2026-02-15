@@ -1,5 +1,6 @@
 ---
 title: Roast Chicken
+lang: en
 section: Cooking
 prep_time: 15 mins
 cook_time: 1 hr 15 mins
@@ -19,4 +20,3 @@ steps:
   - Stuff cavity with lemon and rosemary.
   - Roast for 1h15 or until juices run clear, resting 10 minutes before carving.
 layout: layouts/recipe.njk
----

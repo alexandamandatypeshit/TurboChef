@@ -1,13 +1,16 @@
 ---
 layout: layouts/base.njk
-title: Sauces
-lang: en
+title: Boulangerie
+lang: fr
 ---
-<h1 class="text-3xl font-bold text-accent mb-4">Sauces</h1>
+<h1 class="text-3xl font-bold text-accent mb-4">Boulangerie</h1>
 <div id="tag-filter" class="mb-6"></div>
 <ul id="recipe-list">
-{% for item in collections.recipes_en %}
-  {% if item.data.section == "Sauces" %}
+{% set lang = lang or 'fr' %}
+{% set recipe_collection = collections.recipes_fr %}
+{% set section_name = 'Boulangerie' %}
+{% for item in recipe_collection %}
+  {% if item.data.section == section_name %}
     <li data-tags="{{ item.data.tags | join(',') }}">
       <a href="{{ item.url }}" class="card mb-4 block">
         {{ item.data.title }}
@@ -24,7 +27,7 @@ const recipes = Array.from(document.querySelectorAll('#recipe-list li'));
 const allTags = Array.from(new Set(recipes.flatMap(li => (li.dataset.tags||'').split(',').map(t=>t.trim()).filter(Boolean))));
 if (allTags.length > 0) {
   const filterDiv = document.getElementById('tag-filter');
-  filterDiv.innerHTML = '<span class="mr-2">Filter:</span>' + allTags.map(tag => `<button class="px-2 py-1 rounded bg-gray-100 hover:bg-accent hover:text-white text-xs mr-2 mb-2" data-tag="${tag}">${tag}</button>`).join('');
+  filterDiv.innerHTML = '<span class="mr-2">Filtrer :</span>' + allTags.map(tag => `<button class="px-2 py-1 rounded bg-gray-100 hover:bg-accent hover:text-white text-xs mr-2 mb-2" data-tag="${tag}">${tag}</button>`).join('');
   filterDiv.addEventListener('click', e => {
     if (e.target.dataset.tag) {
       const tag = e.target.dataset.tag;

@@ -1,12 +1,24 @@
 ---
 layout: layouts/base.njk
 title: Baking
+lang: en
 ---
 <h1 class="text-3xl font-bold text-accent mb-4">Baking</h1>
 <div id="tag-filter" class="mb-6"></div>
 <ul id="recipe-list">
-{% for item in collections.recipes %}
-  {% if item.data.section == "Baking" %}
+{% set lang = lang or 'en' %}
+{% if lang == 'fr' %}
+  {% set recipe_collection = collections.recipes_fr %}
+{% else %}
+  {% set recipe_collection = collections.recipes_en %}
+{% endif %}
+{% if lang == 'fr' %}
+  {% set section_name = 'Boulangerie' %}
+{% else %}
+  {% set section_name = 'Baking' %}
+{% endif %}
+{% for item in recipe_collection %}
+  {% if item.data.section == section_name %}
     <li data-tags="{{ item.data.tags | join(',') }}">
       <a href="{{ item.url }}" class="card mb-4 block">
         {{ item.data.title }}

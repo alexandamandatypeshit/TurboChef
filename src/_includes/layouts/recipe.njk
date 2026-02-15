@@ -1,8 +1,12 @@
 ---
 layout: layouts/base.njk
 ---
-<article class="prose recipe-article max-w-2xl mx-auto print:shadow-none print:bg-white">
+{% set lang = lang or 'en' %}
+<article class="prose recipe-article max-w-2xl mx-auto print:shadow-none print:bg-white" lang="{{ lang }}">
   <h1>{{ title }}</h1>
+  {% if summary and summary != '' %}
+    <p class="lead text-lg text-gray-700 mt-2 mb-6">{{ summary | keywordify | safe }}</p>
+  {% endif %}
   {% if image and image != '' %}
     <img src="{{ image }}" alt="{{ title }}">
   {% endif %}
@@ -11,21 +15,56 @@ layout: layouts/base.njk
     <span class="info-badge">Prep: {{ prep_time }}</span>
     <span class="info-badge">Cook: {{ cook_time }}</span>
     <span class="info-badge">Serves: {{ servings }}</span>
+    <span class="info-badge">Calories: <span id="calorie-estimate-inline">—</span></span>
   </div>
-  <div id="calorie-estimate" style="margin-bottom:1.2em;font-size:1.08em;color:#b45309;"></div>
-  <h2>Ingredients</h2>
+  <h2>{% if lang == 'fr' %}Ingrédients{% else %}Ingredients{% endif %}</h2>
   <ul>
   {% for item in ingredients %}
-    <li>{{ item | keywordify | safe }}</li>
+    {% if item.group and item.items %}
+      <li><strong>{{ item.group }}</strong>
+        <ul>
+        {% for sub in item.items %}
+          <li>{{ sub | keywordify | safe }}</li>
+        {% endfor %}
+        </ul>
+      </li>
+    {% else %}
+      <li>{{ item | keywordify | safe }}</li>
+    {% endif %}
   {% endfor %}
   </ul>
-  <h2>Steps</h2>
-  <ol>
+  <h2>{% if lang == 'fr' %}Étapes{% else %}Steps{% endif %}</h2>
+  <ol class="steps-list">
   {% for step in steps %}
-    <li>{{ step | keywordify | safe }}</li>
+    <li class="mb-4 flex gap-4 items-start">
+      <div class="w-8 h-8 flex items-center justify-center rounded-full bg-accent text-white font-bold">{{ loop.index }}</div>
+      <div class="flex-1">{{ step | prettyStep | safe }}</div>
+    </li>
   {% endfor %}
   </ol>
 </article>
 <script src="/assets/modal.js"></script>
 <script src="/assets/calorie.js"></script>
+{% if notes and notes | length > 0 %}
+  <div id="recipe-tips" class="fixed right-6 top-20 w-96 md:w-80 bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-2xl p-5 rounded-lg z-50 hidden md:block" role="complementary" aria-label="Recipe tips">
+    <div class="flex items-start justify-between gap-2 mb-3">
+      <h3 class="text-lg font-semibold">Tips for this recipe</h3>
+      <button id="tips-close" class="text-gray-500 hover:text-gray-800 text-2xl leading-none" aria-label="Close tips">&times;</button>
+    </div>
+    <div class="text-sm text-gray-700 space-y-3">
+      {% for note in notes %}
+        <div class="tip-item rounded-md p-2 bg-white/60 border border-gray-100">{{ note | keywordify | safe }}</div>
+      {% endfor %}
+    </div>
+    <div class="mt-3 text-xs text-gray-400">Tip panel remembers if you close it; open with the <strong>Recipe Tips</strong> button.</div>
+  </div>
+
+  <!-- Toggle button to re-open tips (visible when tips exist) -->
+  <button id="tips-toggle" class="fixed right-6 bottom-6 md:bottom-auto md:top-20 md:right-6 inline-flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-full shadow-lg z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20h.01"/></svg>
+    <span class="text-sm font-medium">Recipe Tips</span>
+  </button>
+{% endif %}
+
+<script src="/assets/tips.js"></script>
 </article>

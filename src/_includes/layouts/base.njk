@@ -15,11 +15,51 @@
       <h1 class="text-5xl font-serif font-bold tracking-tight text-accent drop-shadow">TurboChef</h1>
     </div>
     <nav class="mt-6 flex gap-4 nav-bar">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="/recipes/cooking/">Cooking</a>
-      <a class="nav-link" href="/recipes/baking/">Baking</a>
-      <a class="nav-link" href="/recipes/sauces/">Sauces</a>
+      {% if lang == 'fr' %}
+        {% set langPrefix = '/fr' %}
+      {% else %}
+        {% set langPrefix = '' %}
+      {% endif %}
+      <a class="nav-link" href="{{ langPrefix }}/">{% if lang == 'fr' %}Accueil{% else %}Home{% endif %}</a>
+      <a class="nav-link" href="{{ langPrefix }}/recipes/cooking/">{% if lang == 'fr' %}Cuisine{% else %}Cooking{% endif %}</a>
+      <a class="nav-link" href="{{ langPrefix }}/recipes/baking/">{% if lang == 'fr' %}Boulangerie{% else %}Baking{% endif %}</a>
+      <a class="nav-link" href="{{ langPrefix }}/recipes/sauces/">{% if lang == 'fr' %}Sauces{% else %}Sauces{% endif %}</a>
     </nav>
+    <div class="lang-switcher">
+      <label for="lang-select" class="sr-only">Language</label>
+      <select id="lang-select" class="lang-select">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
+    </div>
+    <script>
+      // Language switcher logic
+      (function() {
+        const select = document.getElementById('lang-select');
+        const path = window.location.pathname;
+        // Detect current language
+        const isFrench = path.startsWith('/fr/');
+        select.value = isFrench ? 'fr' : 'en';
+        select.addEventListener('change', function() {
+          let newPath;
+          if (this.value === 'fr') {
+            if (!isFrench) {
+              newPath = '/fr' + path;
+            } else {
+              newPath = path;
+            }
+          } else {
+            if (isFrench) {
+              newPath = path.replace(/^\/fr/, '');
+              if (newPath === '') newPath = '/';
+            } else {
+              newPath = path;
+            }
+          }
+          window.location.pathname = newPath;
+        });
+      })();
+    </script>
   </header>
   <main class="max-w-3xl mx-auto p-6">
     {{ content | safe }}

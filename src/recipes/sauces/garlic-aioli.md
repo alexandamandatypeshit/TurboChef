@@ -1,5 +1,6 @@
 ---
 title: Garlic Aioli
+lang: en
 section: Sauces
 prep_time: 10 mins
 cook_time: 0 mins

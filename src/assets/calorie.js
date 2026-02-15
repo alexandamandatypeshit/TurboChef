@@ -1,8 +1,5 @@
 // Automatic calorie estimation for recipes
 const CALORIE_DB = {};
-fetch('/assets/calorie-db.json')
-  .then(res => res.json())
-  .then(data => Object.assign(CALORIE_DB, data));
 
 function parseIngredient(ingredient) {
   // Simple parser: "115g butter" or "2 large eggs"
@@ -41,11 +38,16 @@ function estimateCalories(ingredients) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  const el = document.getElementById('calorie-estimate');
+  const el = document.getElementById('calorie-estimate-inline');
   if (!el) return;
-  // Get ingredients from DOM
-  const items = Array.from(document.querySelectorAll('ul li')).map(li => li.textContent.trim());
-  const { total, details } = estimateCalories(items);
-  el.innerHTML = `<b>Estimated Calories (entire recipe):</b> ${total} kcal` +
-    (details.length ? `<details style='margin-top:0.5em;'><summary>Breakdown</summary><ul style='margin:0.5em 0 0 1em;'>${details.map(d=>`<li>${d}</li>`).join('')}</ul></details>` : '');
+  // Load calorie DB then compute using the ingredients in the DOM
+  fetch('/assets/calorie-db.json')
+    .then(res => res.json())
+    .then(data => Object.assign(CALORIE_DB, data))
+    .then(() => {
+      const items = Array.from(document.querySelectorAll('ul li')).map(li => li.textContent.trim());
+      const { total } = estimateCalories(items);
+      el.textContent = total && total > 0 ? `${total} kcal` : '—';
+    })
+    .catch(() => { el.textContent = '—'; });
 });
