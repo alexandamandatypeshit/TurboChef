@@ -41,25 +41,28 @@
       (function() {
         const select = document.getElementById('lang-select');
         const path = window.location.pathname;
-        // Detect current language
-        const isFrench = path.startsWith('/fr/');
+        // Detect current language: pages may be under /fr/ OR use a filename suffix like ".fr"
+        const isFrench = path.startsWith('/fr/') || path.indexOf('.fr') !== -1;
         select.value = isFrench ? 'fr' : 'en';
         select.addEventListener('change', function() {
-          let newPath;
+          let newPath = path;
           if (this.value === 'fr') {
-            if (!isFrench) {
-              newPath = '/fr' + path;
-            } else {
-              newPath = path;
+            // Switch to French canonical path: ensure /fr prefix and remove any .fr filename markers
+            if (!path.startsWith('/fr/')) {
+              // Remove any trailing `.fr` segments (e.g. /recipes/.../slug.fr/ or /slug.fr)
+              const cleaned = path.replace(/\.fr(\/|$)/, '/');
+              newPath = '/fr' + (cleaned === '/' ? '' : cleaned);
             }
           } else {
-            if (isFrench) {
-              newPath = path.replace(/^\/fr/, '');
-              if (newPath === '') newPath = '/';
+            // Switch to English canonical path: remove /fr prefix and any .fr markers
+            if (path.startsWith('/fr/')) {
+              newPath = path.replace(/^\/fr/, '') || '/';
             } else {
-              newPath = path;
+              newPath = path.replace(/\.fr(\/|$)/, '/');
             }
           }
+          // Normalize double-slashes
+          newPath = newPath.replace(/\/\/+/, '/');
           window.location.pathname = newPath;
         });
       })();
