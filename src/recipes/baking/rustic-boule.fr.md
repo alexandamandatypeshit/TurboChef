@@ -1,7 +1,6 @@
 ---
 title: Boule rustique
 lang: fr
-permalink: /fr/recipes/baking/rustic-boule/
 section: Boulangerie
 prep_time: 15 min actives (+ 3–4h de pousse)
 cook_time: 30 min

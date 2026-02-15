@@ -1,7 +1,6 @@
 ---
 title: Nappage léger (sirop)
 lang: fr
-permalink: /fr/recipes/sauces/simple-syrup-glaze/
 section: Sauces
 prep_time: 2 min
 cook_time: 2 min

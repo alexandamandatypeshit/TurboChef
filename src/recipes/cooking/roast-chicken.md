@@ -20,3 +20,4 @@ steps:
   - Stuff cavity with lemon and rosemary.
   - Roast for 1h15 or until juices run clear, resting 10 minutes before carving.
 layout: layouts/recipe.njk
+---

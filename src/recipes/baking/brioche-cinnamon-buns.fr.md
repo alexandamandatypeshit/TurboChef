@@ -1,7 +1,6 @@
 ---
 title: Brioches à la cannelle
 lang: fr
-permalink: /fr/recipes/baking/brioche-cinnamon-buns/
 section: Boulangerie
 prep_time: 30 min actives, 2h au total
 cook_time: 25 min

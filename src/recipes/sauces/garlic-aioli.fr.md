@@ -1,7 +1,6 @@
 ---
 title: Aïoli à l’ail
 lang: fr
-permalink: /fr/recipes/sauces/garlic-aioli/
 section: Sauces
 prep_time: 10 min
 cook_time: 0 min

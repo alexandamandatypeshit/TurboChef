@@ -19,29 +19,30 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/recipes/**/*.fr.md");
   });
 
-  // Add a language property to each page
-  eleventyConfig.addGlobalData("lang", function(data) {
-    if (data && data.page && data.page.inputPath && data.page.inputPath.endsWith('.fr.md')) {
-      return 'fr';
-    }
-    return 'en';
-  });
+  // NOTE: do not set a global `lang` here — prefer per-page front-matter `lang` and
+  // detect language from `page.inputPath` when computing permalinks.
 
   // Ensure French markdown files are output under /fr/... instead of keeping the ".fr" in filenames
   eleventyConfig.addGlobalData('eleventyComputed', function(data) {
     try {
       if (!data || !data.page || !data.page.inputPath) return {};
+      // Don't override an explicit permalink set in front matter
+      if (data.permalink) return {};
+      // Use the input path or front-matter `lang` to decide whether to prefix with /fr
+      const isFrByPath = /\.fr\.(md|njk|html)$/.test(data.page.inputPath || '');
+      if (!isFrByPath && data.lang !== 'fr') return {};
+
       const inputPath = data.page.inputPath;
-      // Only adjust for files ending with .fr.md
-      if (inputPath.endsWith('.fr.md')) {
-        // Compute path relative to project src directory and remove the .fr.md suffix
-        const rel = inputPath.replace(/\\/g, '/').replace(/.*\/src/, '/src');
-        const withoutSrc = rel.replace(/^\/src/, '');
-        const cleanPath = withoutSrc.replace(/\.fr\.md$/, '').replace(/\.md$/, '');
-        // Ensure leading slash and prefix with /fr
-        const permalink = '/fr' + (cleanPath.startsWith('/') ? '' : '/') + cleanPath + '/';
-        return { permalink };
-      }
+      // Compute path relative to project src directory and strip extension
+      const rel = inputPath.replace(/\\/g, '/').replace(/.*\/src/, '/src');
+      const withoutSrc = rel.replace(/^\/src/, '');
+      let cleanPath = withoutSrc.replace(/\.(md|njk|html)$/, '');
+      // Remove trailing /index (we want /fr/recipes/foo/ rather than /fr/recipes/foo/index)
+      cleanPath = cleanPath.replace(/\/index$/, '');
+      if (cleanPath === '') cleanPath = '/';
+      if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+      const permalink = '/fr' + (cleanPath === '/' ? '/' : cleanPath + '/');
+      return { permalink };
     } catch (e) {}
     return {};
   });

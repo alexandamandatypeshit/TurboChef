@@ -1,7 +1,6 @@
 ---
 title: Poulet rôti
 lang: fr
-permalink: /fr/recipes/cooking/roast-chicken/
 section: Cuisine
 prep_time: 15 min
 cook_time: 1h15

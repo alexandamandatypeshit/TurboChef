@@ -1,7 +1,6 @@
 ---
 title: Pain aux raisins
 lang: fr
-permalink: /fr/recipes/baking/raisin-bread/
 section: Boulangerie
 prep_time: 1h active, 4h total
 cook_time: 30 min

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ page.lang or lang or 'en' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -15,15 +15,19 @@
       <h1 class="text-5xl font-serif font-bold tracking-tight text-accent drop-shadow">TurboChef</h1>
     </div>
     <nav class="mt-6 flex gap-4 nav-bar">
-      {% if lang == 'fr' %}
+      {% set pageLang = page.lang or lang or 'en' %}
+      {% if page.lang == 'fr' or (page.url and '/fr/' in page.url) or (page.inputPath and '.fr.' in page.inputPath) %}
+        {% set pageLang = 'fr' %}
+      {% endif %}
+      {% if pageLang == 'fr' %}
         {% set langPrefix = '/fr' %}
       {% else %}
         {% set langPrefix = '' %}
       {% endif %}
-      <a class="nav-link" href="{{ langPrefix }}/">{% if lang == 'fr' %}Accueil{% else %}Home{% endif %}</a>
-      <a class="nav-link" href="{{ langPrefix }}/recipes/cooking/">{% if lang == 'fr' %}Cuisine{% else %}Cooking{% endif %}</a>
-      <a class="nav-link" href="{{ langPrefix }}/recipes/baking/">{% if lang == 'fr' %}Boulangerie{% else %}Baking{% endif %}</a>
-      <a class="nav-link" href="{{ langPrefix }}/recipes/sauces/">{% if lang == 'fr' %}Sauces{% else %}Sauces{% endif %}</a>
+      <a class="nav-link" href="{{ langPrefix }}/">{% if pageLang == 'fr' %}Accueil{% else %}Home{% endif %}</a>
+      <a class="nav-link" href="{{ langPrefix }}/recipes/cooking/">{% if pageLang == 'fr' %}Cuisine{% else %}Cooking{% endif %}</a>
+      <a class="nav-link" href="{{ langPrefix }}/recipes/baking/">{% if pageLang == 'fr' %}Boulangerie{% else %}Baking{% endif %}</a>
+      <a class="nav-link" href="{{ langPrefix }}/recipes/sauces/">{% if pageLang == 'fr' %}Sauces{% else %}Sauces{% endif %}</a>
     </nav>
     <div class="lang-switcher">
       <label for="lang-select" class="sr-only">Language</label>

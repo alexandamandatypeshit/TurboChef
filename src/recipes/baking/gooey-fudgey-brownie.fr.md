@@ -1,7 +1,6 @@
 ---
 title: Brownie fondant et fudge
 lang: fr
-permalink: /fr/recipes/baking/gooey-fudgey-brownie/
 section: Boulangerie
 prep_time: 10 min
 cook_time: 25 min
